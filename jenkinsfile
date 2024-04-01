@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+              
+                git 'https://github.com/mahasadha/mytask4.git'
+
+                // Build Docker image
+                sh 'docker build -t newjavatask .'
+            }
+        }
+        stage('Push to Docker Registry') {
+            steps {
+                // Authenticate with Docker Hub
+                withCredentials([usernamePassword(credentialsId: 'your-docker-hub-credentials', usernameVariable: 'mahasadha', passwordVariable: 'Ssvm#4036')]) {
+                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                }
+                // Push Docker image to Docker Hub
+                sh 'docker push mahasadha/newjavatask:latest'
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                // Run Docker container from the published image
+                sh 'docker run --rm mahasadha/newjavatask:latest'
+            }
+        }
+    }
+}

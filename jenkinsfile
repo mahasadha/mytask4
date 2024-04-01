@@ -14,7 +14,7 @@ pipeline {
         stage('Push to Docker Registry') {
             steps {
                 // Authenticate with Docker Hub
-                withCredentials([usernamePassword(credentialsId: 'your-docker-hub-credentials', usernameVariable: 'mahasadha', passwordVariable: 'Ssvm#4036')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker123', usernameVariable: 'mahasadha', passwordVariable: 'Ssvm#4036')]) {
                     sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                 }
                 // Push Docker image to Docker Hub

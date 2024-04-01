@@ -4,18 +4,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-              
+                // Checkout source code from Git repository
                 git 'https://github.com/mahasadha/mytask4.git'
 
                 // Build Docker image
-                sh 'docker build -t newjavatask .'
+                sh 'docker build -t mahasadha/newjavatask .'
             }
         }
         stage('Push to Docker Registry') {
             steps {
                 // Authenticate with Docker Hub
                 withCredentials([usernamePassword(credentialsId: 'docker123', usernameVariable: 'mahasadha', passwordVariable: 'Ssvm#4036')]) {
-                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                    sh 'docker login -u $mahasadha -p $Ssvm#4036'
                 }
                 // Push Docker image to Docker Hub
                 sh 'docker push mahasadha/newjavatask:latest'
